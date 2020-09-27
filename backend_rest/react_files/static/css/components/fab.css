@@ -1,0 +1,15 @@
+.fab {
+  background: #33f;
+  color: #ddd;
+  border: 0;
+  border-radius: 50%;
+  width: 2.4em;
+  height: 2.4em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  bottom: 1em;
+  right: 1em;
+  outline: none;
+}

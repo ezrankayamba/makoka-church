@@ -1,0 +1,17 @@
+.toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #ebfaf8;
+  padding: 0.2em;
+}
+.toolbar .titlebar {
+  display: flex;
+  align-items: center;
+}
+.toolbar a.btn {
+  border: 0;
+  outline: none;
+  display: flex;
+  justify-content: center;
+}

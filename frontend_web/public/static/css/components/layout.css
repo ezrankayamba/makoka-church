@@ -1,0 +1,16 @@
+#root {
+  min-height: 100%;
+}
+
+.page-content .content {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 0.4em;
+}
+@media only screen and (min-width: 800px) {
+  .navbar .content,
+  .page-content .content {
+    max-width: 72%;
+    margin: auto;
+  }
+}

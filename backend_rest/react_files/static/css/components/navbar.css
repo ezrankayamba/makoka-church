@@ -1,0 +1,64 @@
+.navbar {
+  background: var(--color-primary);
+  color: var(--color-secondary);
+}
+header > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.35em 0.4em;
+}
+
+header > div h3 {
+  color: var(--color-dark);
+  background: var(--color-light);
+  padding: 0.2em 0.4em;
+}
+
+header > div > div.nav-links {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header > div > div.nav-links ul {
+  display: flex;
+  align-items: center;
+}
+header > div > div.nav-links .user-profile-nav {
+  display: flex;
+  align-items: center;
+}
+header > div > div.nav-links li {
+  padding: 0.4em;
+}
+.nav-links a {
+  color: var(--color-light);
+}
+.nav-links a.active {
+  --color-active: var(--color-brand);
+  padding: 0.7em 0;
+  border-bottom: 0.1em solid var(--color-active);
+  color: var(--color-active);
+}
+.navbar .user-profile-nav ul {
+  display: flex;
+  font-size: 0.8em;
+  align-items: center;
+}
+.navbar .user-profile-nav ul li {
+  padding: 0 0.4em;
+}
+.user-profile-nav {
+  border: 1px solid var(--color-light);
+  padding: 0.2em;
+  border-radius: 1em;
+}
+.user-profile-nav b {
+  color: var(--color-secondary);
+}
+@media only screen and (max-width: 800px) {
+  header > div {
+    flex-direction: column;
+  }
+}

@@ -1,0 +1,129 @@
+.form {
+  margin-top: 0.4em;
+  padding: 0 0.3em 0.4em;
+  font-size: 0.9em;
+  background: rgb(253, 253, 253);
+}
+.form.v-scroll .form-fields {
+  max-height: 80vh;
+  overflow-y: auto;
+}
+.form .form-grid-2 {
+  display: grid;
+  grid-template-columns: auto auto;
+  gap: 1em;
+}
+.form .inline-fields {
+  display: flex;
+}
+.form .inline-fields .input-wrap {
+  margin-right: 0.4em;
+}
+.form .input-wrap {
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+}
+.form .input-wrap label {
+  padding: 0.4em 0 0.1em;
+  font-size: 0.9em;
+}
+.form .input-wrap input,
+.form .input-wrap select {
+  padding: 0.4em 0.6em;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 0.2em;
+  outline: none;
+}
+.form .input-wrap textarea {
+  padding: 0.2em 0.6em;
+  border: 1px solid rgb(180, 180, 180);
+  border-radius: 0.2em;
+  outline: none;
+  /* height: 100%; */
+}
+
+.form .form-footer {
+  background: rgb(250, 250, 255);
+  padding: 0.4em;
+  margin-top: 0.4em;
+  display: flex;
+  justify-content: flex-end;
+  font-size: 1em;
+}
+
+.form .form-footer button {
+  padding: 0.4em 0.8em;
+  background: rgb(40, 40, 255);
+  border: 0;
+  border-radius: 0.2em;
+  color: #ddd;
+}
+
+.form-wrap p {
+  font-size: 0.75em;
+  color: rgb(78, 98, 114);
+}
+
+.input-help {
+  font-size: 0.55em;
+  color: #777;
+}
+.grid-form-details {
+  font-size: 0.8em;
+  margin-top: 0.4em;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em;
+}
+.grid-form-details > div {
+  border: 1px solid var(--color-light);
+}
+.grid-form-details > div.span {
+  grid-column: 1/-1;
+}
+.grid-form-details label {
+  line-height: 1.5em;
+  padding: 0 0.4rem;
+  font-weight: bold;
+  background: var(--color-light);
+  display: flex;
+}
+.grid-form-details p {
+  background: #ffffff;
+  padding: 0.4rem;
+  font-size: 0.8em;
+}
+
+.details .status {
+  background: var(--color-brand);
+  padding: 0.2em 0.4em;
+  color: var(--color-primary);
+  font-size: 0.8em;
+}
+.details .status span {
+  font-weight: bold;
+  color: var(--color-light);
+}
+.form.form-medium {
+  max-width: 24em;
+}
+.register-right {
+  display: flex;
+  flex-direction: column;
+}
+.register-right .input-wrap.large {
+  flex-grow: 1;
+}
+.register-right .input-wrap.large textarea {
+  height: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+  .form .form-grid-2 {
+    grid-template-columns: 1fr;
+  }
+  .form.form-medium {
+    width: 100vw;
+  }
+}
