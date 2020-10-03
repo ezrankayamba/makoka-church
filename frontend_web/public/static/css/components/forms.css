@@ -127,4 +127,9 @@
   .form.form-medium {
     width: 100vw;
   }
+  .filter-export {
+    overflow-x: auto;
+    background: rgb(253, 253, 253);
+    padding: 0.4em;
+  }
 }
