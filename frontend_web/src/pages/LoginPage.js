@@ -6,6 +6,7 @@ import { Redirect } from "react-router-dom";
 import { useMutation } from "@apollo/react-hooks";
 import { USERS_GET_TOKEN, USERS_GET_ME } from "../helpers/UsersGraphQL";
 import { COMPLAINTS } from "../helpers/GraphQL";
+import { APP_NAME } from "../conf";
 
 function LoginPage(props) {
   const [formData, setFormData] = useState(new Map());
@@ -40,7 +41,7 @@ function LoginPage(props) {
     <>
       <div className="login-page box-shadow">
         <div className="login-header d-flex mb-1 p-1">
-          <h3>Twiga - CCMS</h3>
+          <h3>{APP_NAME}</h3>
           <img
             src={
               process.env.PUBLIC_URL + "/static/images/complaints_register.png"

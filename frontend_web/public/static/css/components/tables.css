@@ -7,7 +7,7 @@ table {
   width: 100%;
   text-align: left;
   border-collapse: collapse;
-  font-size: 0.7rem;
+  font-size: 0.8rem;
   table-layout: auto;
 }
 table thead tr {
@@ -27,8 +27,8 @@ th {
   font-size: 0.8em;
 }
 td {
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
 }
 td.col-ellipsis {
   max-width: 10em;

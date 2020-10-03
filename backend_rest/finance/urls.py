@@ -4,11 +4,9 @@ from graphene_django.views import GraphQLView
 import graphene
 from . import views
 from . import schema
+g_view = GraphQLView.as_view(graphiql=True, schema=schema.root_schema)
 
 urlpatterns = [
-    path(
-        'graphql',
-        csrf_exempt(
-            GraphQLView.as_view(graphiql=True, schema=schema.root_schema))),
-    path('export-complaints', views.export_complaints),
+    path('graphql', csrf_exempt(g_view)),
+    path('export-entries', views.export_entries)
 ]

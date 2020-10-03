@@ -11,7 +11,7 @@ header > div {
 
 header > div h3 {
   color: var(--color-dark);
-  background: var(--color-light);
+  /* background: var(--color-light); */
   padding: 0.2em 0.4em;
 }
 

@@ -2,6 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import UserProfile from "./UserProfile";
 import useProfile from "../hooks/useProfile";
+import { APP_NAME } from "../../conf";
 
 function NavBar() {
   const user = useProfile();
@@ -9,7 +10,7 @@ function NavBar() {
   return (
     <header className="navbar container">
       <div className="content">
-        <h3>Twiga - CCMS</h3>
+        <h3>{APP_NAME}</h3>
         <div className="nav-links">
           <ul>
             <li>
@@ -18,7 +19,7 @@ function NavBar() {
               </NavLink>
             </li>
             <li>
-              <NavLink to="/complaints">Complaints</NavLink>
+              <NavLink to="/entries">Entries</NavLink>
             </li>
             {user && user.me && user.me.isSuperuser && (
               <li>

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import ApolloClient from "apollo-boost";
 import { ApolloProvider } from "@apollo/react-hooks";
-import ComplaintsPage from "./pages/ComplaintsPage";
+import EntriesPage from "./pages/EntriesPage";
 import UserManagementPage from "./pages/UserManagementPage";
 import LoginPage from "./pages/LoginPage";
 import AuthHelper from "./helpers/AuthHelper";
@@ -41,8 +41,8 @@ function App() {
                   <Route path="/" exact>
                     <HomePage />
                   </Route>
-                  <Route path="/complaints">
-                    <ComplaintsPage />
+                  <Route path="/entries">
+                    <EntriesPage />
                   </Route>
                   <Route path="/users">
                     <UserManagementPage />

@@ -1,32 +1,30 @@
 import React, { useState } from "react";
-import { NATURES, LOCATIONS, GET_STATUSES } from "../../helpers/GraphQL";
+import { GET_ENTITIES } from "../../helpers/GraphQL";
 import FilterExport from "../../components/forms/FilterExport";
+import { Dates } from "../../helpers/Dates";
 
 function FilterForm({ handleSubmit, handleExport, filter = {} }) {
   console.log(filter);
   const [formData, setFormData] = useState(filter);
   const searchFields = [
-    { name: "clientName", label: "Client Name" },
     {
-      name: "location",
-      label: "Location",
+      name: "entity",
+      label: "Entity",
       type: "select",
-      query: { name: LOCATIONS, data: "locations" },
-      defaultValue: filter["location"],
+      query: { name: GET_ENTITIES, data: "entities" },
+      defaultValue: filter["entity"],
     },
     {
-      name: "nature",
-      label: "Nature",
-      type: "select",
-      query: { name: NATURES, data: "natures" },
-      defaultValue: filter["nature"],
+      name: "dateFrom",
+      label: "From",
+      type: "date",
+      defaultValue: Dates.fmt(Date.now()),
     },
     {
-      name: "status",
-      label: "Status",
-      type: "select",
-      query: { name: GET_STATUSES, data: "statuses" },
-      defaultValue: filter["status"],
+      name: "dateTo",
+      label: "To",
+      type: "date",
+      defaultValue: Dates.fmt(Date.now()),
     },
   ];
   function handleChange(e) {

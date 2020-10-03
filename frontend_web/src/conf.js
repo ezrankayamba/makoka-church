@@ -18,3 +18,4 @@ const CONF = {
 export const BASE_URL = CONF[ENVIRON].baseUrl;
 export const ROOT_URL = CONF[ENVIRON].ROOT;
 export const GOOGLE_API_KEY = "AIzaSyDQ7WXCqy5-cyHTyho_XLgBDHJZe4n-nAw";
+export const APP_NAME = "TAG MAKOKA (MSCC)";
