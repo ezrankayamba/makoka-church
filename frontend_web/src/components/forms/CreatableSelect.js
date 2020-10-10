@@ -34,23 +34,22 @@ function CreatableSelect({
     if (onCreateOption) onCreateOption(name, value);
   }
 
+  console.log(name, options)
   const selOptions = options.map((e) => {
     return { value: e.id, label: e.name };
   });
-  let selObj = selOptions.find((o) => {
-    console.log(defaultValue, o.value);
+  let selObj = selOptions && selOptions.find((o) => {
     return defaultValue == o.value;
   });
-  console.log(selObj);
   const value =
-    defaultValue && selObj
+    defaultValue !== undefined && selObj
       ? {
-          value: defaultValue,
-          label: selObj.label,
-        }
+        value: defaultValue,
+        label: selObj.label,
+      }
       : null;
 
-  console.log(value);
+  // console.log(value);
   return (
     <div className="input-wrap">
       <label htmlFor={name}>{label}</label>

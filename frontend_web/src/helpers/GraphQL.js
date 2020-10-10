@@ -17,6 +17,7 @@ export const GET_ENTRIES = gql`
     ) {
       id
       amount
+      entryType
       createdAt
       updatedAt
       entity {
@@ -37,8 +38,8 @@ export const GET_ENTITIES = gql`
 `;
 
 export const CREATE_ENTRY = gql`
-  mutation createEntry($entity: ID!, $amount: Float!) {
-    createEntry(input: { entity: $entity, amount: $amount }) {
+  mutation createEntry($entity: ID!, $amount: Float!, $entryType: Int!) {
+    createEntry(input: { entity: $entity, amount: $amount, entryType: $entryType }) {
       result {
         id
       }

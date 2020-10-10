@@ -81,6 +81,7 @@ function EntriesPage() {
     { name: "id", label: "ID" },
     { name: "entity_name", label: "Entity" },
     { name: "amount", label: "Amount" },
+    { name: "entryType", label: "Entry Type" },
     { name: "createdAt", label: "Created" },
     // { name: "updatedAt", label: "Updated" },
   ];
@@ -90,12 +91,13 @@ function EntriesPage() {
   };
   const records = data
     ? data.entries.map((r) => ({
-        ...r,
-        entity_name: r.entity.name,
-        createdAt: fmtDate(r.createdAt),
-        updatedAt: fmtDate(r.updatedAt),
-        amount: Numbers.fmt(r.amount),
-      }))
+      ...r,
+      entity_name: r.entity.name,
+      createdAt: fmtDate(r.createdAt),
+      updatedAt: fmtDate(r.updatedAt),
+      amount: Numbers.fmt(r.amount),
+      entryType: r.entryType === 0 ? "Revenue" : "Expense"
+    }))
     : [];
   return (
     <>
