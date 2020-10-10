@@ -7,8 +7,8 @@ function Input({ label, name, help, type = "text", cls, ...props }) {
       {type === "textarea" ? (
         <textarea name={name} id={name} {...props} />
       ) : (
-        <input type={type} name={name} id={name} {...props} />
-      )}
+          <input type={type} name={name} id={name} {...props} autoComplete={false} />
+        )}
       {help && <span className="input-help">{help}</span>}
     </div>
   );

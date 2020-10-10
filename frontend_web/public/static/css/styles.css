@@ -43,6 +43,31 @@ a {
   text-decoration: none;
 }
 
+.summary {
+  font-size: .8em;
+  /* border:1px solid  var(--color-light); */
+  /* padding: .4rem; */
+}
+.summary h5{
+  padding-bottom: 1em;
+  border-bottom:1px solid  var(--color-light);
+  margin: .4rem;
+  /* margin: 0 0 .4em; */
+}
+.summary p{
+  padding: .3rem .4em ;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.summary hr{
+  margin: 0 .4em ;
+  color: var(--color-light);
+}
+.summary p span{
+  text-align: right;
+  padding-left: 1em;
+}
 @media only screen and (max-width: 600px) {
   body {
     font-size: 0.9rem;

@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import FilterForm from "./entries/FilterForm";
 import { BASE_URL } from "../conf";
 import Numbers from "../helpers/Numbers";
+import EntrySummary from "./entries/EntrySummary";
 const PAGE_SIZE = 10;
 function EntriesPage() {
   useProfile();
@@ -20,6 +21,7 @@ function EntriesPage() {
   const [getEntries, { loading, data, error }] = useLazyQuery(GET_ENTRIES, {
     variables: { pageSize: PAGE_SIZE, pageNo: pageNo, ...filter },
   });
+
 
   useEffect(() => {
     const abortCtrl = new AbortController();
@@ -71,12 +73,6 @@ function EntriesPage() {
     setPageNo(newPageNo);
   }
 
-  const [] = useState(false);
-  const [] = useState(null);
-
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error :(</p>;
-
   const columns = [
     { name: "id", label: "ID" },
     { name: "entity_name", label: "Entity" },
@@ -99,6 +95,8 @@ function EntriesPage() {
       entryType: r.entryType === 0 ? "Revenue" : "Expense"
     }))
     : [];
+
+
   return (
     <>
       <Route path="/entries" exact>
@@ -118,17 +116,22 @@ function EntriesPage() {
             />
           )}
         </div>
-        <Table columns={columns} data={records} />
-        {data && (
-          <Pagination
-            pageNo={pageNo}
-            onPageChanged={handlePageChange}
-            lastPage={data.entries.length < PAGE_SIZE}
-          />
-        )}
+        <div className="d-flex">
+          <div className="d-flex-main">
+            <Table columns={columns} data={records} />
+            {data && (
+              <Pagination
+                pageNo={pageNo}
+                onPageChanged={handlePageChange}
+                lastPage={data.entries.length < PAGE_SIZE}
+              />
+            )}
+          </div>
+          <EntrySummary filter={filter} />
+        </div>
       </Route>
       <Route path="/entries/new-entry" exact>
-        <NewEntryPage />
+        <NewEntryPage filter={filter} />
       </Route>
     </>
   );

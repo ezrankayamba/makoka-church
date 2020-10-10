@@ -1,6 +1,6 @@
 button {
   padding: 0.5em 0.7em;
-  font-size: 0.9em;
+  /* font-size: 0.9em; */
   outline: none;
   border: 1px solid #ccc;
   border-radius: 0.4em;
@@ -27,13 +27,17 @@ button {
 .d-flex {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  /* align-items: center; */
+  gap: .4rem;
 }
 .d-flex.align-left {
   justify-content: flex-start;
 }
 .d-flex.align-bottom {
   align-items: flex-end;
+}
+.d-flex .d-flex-main {
+  flex: 1;
 }
 
 .m-1 {

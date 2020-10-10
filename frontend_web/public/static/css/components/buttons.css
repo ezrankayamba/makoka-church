@@ -9,6 +9,10 @@
 a.btn {
   font-size: 0.8em;
 }
+.btn span{
+  display: flex;
+  align-items: center;
+}
 .btn.has-left-icon {
   padding-left: 0;
 }

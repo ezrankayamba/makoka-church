@@ -9,17 +9,17 @@ import {
 } from "../../helpers/GraphQL";
 import MatIcon from "../../components/icons/MatIcon";
 import { NavLink, Redirect } from "react-router-dom";
-import { ENTRIES_FILTER_VARS } from "../../constants";
+import { ENTRIES_FILTER_VARS, ENTRIES_FILTER_VARS_NO_PAGES } from "../../constants";
 import CreatableSelect from "../../components/forms/CreatableSelect";
 
-function NewEntryPage({ }) {
+function NewEntryPage({ filter }) {
   const entryTypes = [{ id: 0, name: "Revenue" }, { id: 1, name: "Expense" }]
   let entities = useQuery(GET_ENTITIES);
   const [redirect] = useState(null);
+  const [message, setMessage] = useState(null);
   const defaultData = new Map()
   defaultData['entryType'] = 0
   const [formData, setFormData] = useState(defaultData);
-  console.log("Form Data", formData)
   const [createEntry, { loading }] = useMutation(CREATE_ENTRY);
   const [createEntity, { }] = useMutation(CREATE_ENTITY);
   const entityOptions = entities.data ? entities.data.entities : [];
@@ -28,22 +28,28 @@ function NewEntryPage({ }) {
   function handleSubmit(e) {
     e.preventDefault();
     console.log("The new form data: ", formData)
-    createEntry({
-      variables: {
-        ...formData,
-      },
-      refetchQueries: () => [
-        { query: GET_ENTRIES, variables: ENTRIES_FILTER_VARS },
-      ],
-      awaitRefetchQueries: true,
-    }).then(
-      () => {
-        // setRedirect("/entries/new-entry?abc");
-        // window.location.reload();
-        setFormData(defaultData)
-      },
-      (res) => console.log("Error: ", res)
-    );
+    if (formData['entity'] && formData['amount'] && formData['entryType']) {
+      createEntry({
+        variables: {
+          ...formData,
+        },
+        refetchQueries: () => [
+          { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS, filter } },
+          { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS_NO_PAGES, ...filter } },
+        ],
+        awaitRefetchQueries: true,
+      }).then(
+        () => {
+          // setRedirect("/entries/new-entry?abc");
+          // window.location.reload();
+          setFormData({ ...formData, amount: "", entity: null })
+        },
+        (res) => console.log("Error: ", res)
+      );
+    } else {
+      setMessage("Fill in amount & entity")
+    }
+
   }
   function handleChange(e) {
     const { value, name } = e.target;
@@ -60,10 +66,10 @@ function NewEntryPage({ }) {
     }).then(
       (res) => {
         let id = res.data.createEntity.result.id;
-        console.log("Res", res.data.createEntity.result.id);
         setFormData({ ...formData, [name]: id });
+        setMessage("Successfully recorded!")
       },
-      (res) => console.log("Error: ", res)
+      (res) => setMessage(message)
     );
   }
   console.log(entryTypes)
@@ -80,7 +86,8 @@ function NewEntryPage({ }) {
           </div>
         </div>
         {loading && <p>Sending ....</p>}
-        <form className="form" onSubmit={handleSubmit}>
+        {message && <small className="p-1">Message: {message}</small>}
+        <form className="form" onSubmit={handleSubmit} autoComplete={"off"}>
           <div>
             <CreatableSelect
               name="entryType"
@@ -106,6 +113,7 @@ function NewEntryPage({ }) {
               type="number"
               onChange={handleChange}
               required
+              defaultValue={formData['amount'] || undefined}
               min={100}
             />
           </div>
