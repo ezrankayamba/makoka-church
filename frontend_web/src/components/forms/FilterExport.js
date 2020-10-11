@@ -17,8 +17,8 @@ function FilterExport({
             return f.type && f.type === "select" ? (
               <Select key={f.name} {...f} onChange={handleChange} />
             ) : (
-              <Input key={f.name} {...f} onChange={handleChange} />
-            );
+                <Input key={f.name} {...f} onChange={handleChange} />
+              );
           })}
         </div>
         <div className="d-flex">

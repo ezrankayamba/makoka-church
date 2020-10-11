@@ -43,9 +43,9 @@ function LoginPage(props) {
             <h3>{APP_NAME}</h3>
             <img
               src={
-                process.env.PUBLIC_URL + "/static/images/complaints_register.png"
+                process.env.PUBLIC_URL + "/static/images/logo.png"
               }
-              alt="Image"
+              alt="Logo"
             />
           </div>
           <form className="form" onSubmit={handleSubmit}>

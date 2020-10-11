@@ -114,3 +114,13 @@ button {
 .message.success {
   color: green;
 }
+
+/* desktop */
+@media only screen and (max-width: 600px) {
+  body {
+    font-size: 0.9rem;
+  }
+  .d-flex.desktop {
+    display: block;
+  }
+}

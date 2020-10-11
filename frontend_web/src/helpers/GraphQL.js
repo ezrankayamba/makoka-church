@@ -38,8 +38,8 @@ export const GET_ENTITIES = gql`
 `;
 
 export const CREATE_ENTRY = gql`
-  mutation createEntry($entity: ID!, $amount: Float!, $entryType: Int!) {
-    createEntry(input: { entity: $entity, amount: $amount, entryType: $entryType }) {
+  mutation createEntry($entity: ID!, $amount: Float!, $entryType: Int!, $createdAt: DateTime!) {
+    createEntry(input: { entity: $entity, amount: $amount, entryType: $entryType, createdAt: $createdAt }) {
       result {
         id
       }

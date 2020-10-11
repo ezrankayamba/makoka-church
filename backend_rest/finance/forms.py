@@ -11,7 +11,7 @@ class EntityForm(forms.ModelForm):
 class EntryForm(forms.ModelForm):
     class Meta:
         model = models.Entry
-        fields = ['entity', 'amount', 'entry_type']
+        fields = ['entity', 'amount', 'entry_type', 'created_at']
 
 
 class CsvImportForm(forms.Form):

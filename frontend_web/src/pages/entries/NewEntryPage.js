@@ -12,6 +12,7 @@ import { NavLink, Redirect } from "react-router-dom";
 import { ENTRIES_FILTER_VARS, ENTRIES_FILTER_VARS_NO_PAGES } from "../../constants";
 import CreatableSelect from "../../components/forms/CreatableSelect";
 import useProfile from "../../components/hooks/useProfile";
+import { Dates } from "../../helpers/Dates";
 
 function NewEntryPage({ filter }) {
   useProfile()
@@ -21,6 +22,7 @@ function NewEntryPage({ filter }) {
   const [message, setMessage] = useState(null);
   const defaultData = new Map()
   defaultData['entryType'] = 0
+  defaultData['createdAt'] = Dates.fmt(Date.now()) + " 00:00"
   const [formData, setFormData] = useState(defaultData);
   const [createEntry, { loading }] = useMutation(CREATE_ENTRY);
   const [createEntity, { }] = useMutation(CREATE_ENTITY);
@@ -32,7 +34,7 @@ function NewEntryPage({ filter }) {
     if (formData['entity'] && formData['amount']) {
       createEntry({
         variables: {
-          ...formData,
+          ...formData, createdAt: formData['createdAt'].replace(" ", "T")
         },
         refetchQueries: () => [
           { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS, filter } },
@@ -92,6 +94,14 @@ function NewEntryPage({ filter }) {
 
         <form className="form" onSubmit={handleSubmit} autoComplete={"off"}>
           <div>
+            <Input
+              name="createdAt"
+              label="Record Date"
+              type="datetime-local"
+              onChange={handleChange}
+              required
+              defaultValue={Dates.fmt(Date.now()) + "T00:00"}
+            />
             <CreatableSelect
               name="entryType"
               label="Type"

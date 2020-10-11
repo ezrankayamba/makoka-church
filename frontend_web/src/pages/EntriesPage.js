@@ -116,7 +116,7 @@ function EntriesPage() {
             />
           )}
         </div>
-        <div className="d-flex">
+        <div className="d-flex desktop">
           <div className="d-flex-main">
             <Table columns={columns} data={records} />
             {data && (
