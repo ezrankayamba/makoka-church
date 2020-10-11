@@ -29,12 +29,10 @@ function CreatableSelect({
       onChange({ target: { name: name, value: option.value } });
     }
   }
-
   function handleCreate(value) {
     if (onCreateOption) onCreateOption(name, value);
   }
 
-  console.log(name, options)
   const selOptions = options.map((e) => {
     return { value: e.id, label: e.name };
   });
@@ -48,8 +46,6 @@ function CreatableSelect({
         label: selObj.label,
       }
       : null;
-
-  // console.log(value);
   return (
     <div className="input-wrap">
       <label htmlFor={name}>{label}</label>

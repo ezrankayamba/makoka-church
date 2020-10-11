@@ -49,6 +49,11 @@ td.col-ellipsis {
 .pagination li span {
   color: rgb(24, 102, 133);
 }
+
+.pagination li:not(.btn-wrap) span {
+  font-size: .8em;
+  color: var(--color-dark);
+}
 .pagination .btn-wrap:first-child button {
   padding: 0.1em 0.5em 0.1em 0;
 }

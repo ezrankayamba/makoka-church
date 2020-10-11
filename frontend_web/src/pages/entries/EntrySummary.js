@@ -29,10 +29,10 @@ function EntrySummary({ filter }) {
 
     return <div className="summary">
         <h5>Summary</h5>
-        <p><div>Revenue: <br /><i><small>{revenues.length} record(s)</small></i></div> <span>{Numbers.fmt(totalRevenue)}</span></p>
-        <p><div>Expense:<br /><i><small>{expenses.length} record(s)</small></i> </div><span>{Numbers.fmt(totalExpenses)}</span></p>
+        <div><div>Revenue: <br /><i><small>{revenues.length} record(s)</small></i></div> <span>{Numbers.fmt(totalRevenue)}</span></div>
+        <div><div>Expense:<br /><i><small>{expenses.length} record(s)</small></i> </div><span>{Numbers.fmt(totalExpenses)}</span></div>
         <hr />
-        <p>Balance: <span>{Numbers.fmt(balance)}</span></p>
+        <div>Balance: <span>{Numbers.fmt(balance)}</span></div>
     </div>
 }
 

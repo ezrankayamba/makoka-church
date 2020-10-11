@@ -11,8 +11,10 @@ import MatIcon from "../../components/icons/MatIcon";
 import { NavLink, Redirect } from "react-router-dom";
 import { ENTRIES_FILTER_VARS, ENTRIES_FILTER_VARS_NO_PAGES } from "../../constants";
 import CreatableSelect from "../../components/forms/CreatableSelect";
+import useProfile from "../../components/hooks/useProfile";
 
 function NewEntryPage({ filter }) {
+  useProfile()
   const entryTypes = [{ id: 0, name: "Revenue" }, { id: 1, name: "Expense" }]
   let entities = useQuery(GET_ENTITIES);
   const [redirect] = useState(null);
@@ -27,8 +29,7 @@ function NewEntryPage({ filter }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log("The new form data: ", formData)
-    if (formData['entity'] && formData['amount'] && formData['entryType']) {
+    if (formData['entity'] && formData['amount']) {
       createEntry({
         variables: {
           ...formData,
@@ -39,21 +40,25 @@ function NewEntryPage({ filter }) {
         ],
         awaitRefetchQueries: true,
       }).then(
-        () => {
+        (res) => {
           // setRedirect("/entries/new-entry?abc");
           // window.location.reload();
+          console.log(res)
           setFormData({ ...formData, amount: "", entity: null })
+          setMessage({ error: false, text: `Successfully recorded an entry: ${res.data.createEntry.result.id}` })
         },
-        (res) => console.log("Error: ", res)
+        (res) => {
+          console.log("Error: ", res)
+          setMessage({ error: true, text: "Form submit failed!" });
+        }
       );
     } else {
-      setMessage("Fill in amount & entity")
+      setMessage({ error: true, text: "Fill in amount & entity" })
     }
 
   }
   function handleChange(e) {
     const { value, name } = e.target;
-    console.log(name, value)
     setFormData({ ...formData, [name]: value });
   }
   function onCreateOption(name, value) {
@@ -67,12 +72,10 @@ function NewEntryPage({ filter }) {
       (res) => {
         let id = res.data.createEntity.result.id;
         setFormData({ ...formData, [name]: id });
-        setMessage("Successfully recorded!")
       },
-      (res) => setMessage(message)
+      (res) => setMessage({ error: true, text: "Error creating entity" })
     );
   }
-  console.log(entryTypes)
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
@@ -86,7 +89,7 @@ function NewEntryPage({ filter }) {
           </div>
         </div>
         {loading && <p>Sending ....</p>}
-        {message && <small className="p-1">Message: {message}</small>}
+
         <form className="form" onSubmit={handleSubmit} autoComplete={"off"}>
           <div>
             <CreatableSelect
@@ -113,7 +116,7 @@ function NewEntryPage({ filter }) {
               type="number"
               onChange={handleChange}
               required
-              defaultValue={formData['amount'] || undefined}
+              value={formData['amount']}
               min={100}
             />
           </div>
@@ -121,6 +124,7 @@ function NewEntryPage({ filter }) {
             <button>Submit</button>
           </div>
         </form>
+        {message && <small className={`p-1 message ${message.error ? "fail" : "success"}`}>{message.text}</small>}
       </div>
     );
 }

@@ -47,14 +47,15 @@ a {
   font-size: .8em;
   /* border:1px solid  var(--color-light); */
   /* padding: .4rem; */
+  color: var(--color-light);
 }
 .summary h5{
   padding-bottom: 1em;
-  border-bottom:1px solid  var(--color-light);
+  /* border-bottom: 2px solid  var(--color-light); */
   margin: .4rem;
   /* margin: 0 0 .4em; */
 }
-.summary p{
+.summary > div{
   padding: .3rem .4em ;
   display: flex;
   justify-content: space-between;
@@ -62,9 +63,9 @@ a {
 }
 .summary hr{
   margin: 0 .4em ;
-  color: var(--color-light);
+  border-bottom: 1px solid var(--color-light);
 }
-.summary p span{
+.summary > div span{
   text-align: right;
   padding-left: 1em;
 }

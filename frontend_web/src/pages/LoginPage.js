@@ -4,14 +4,13 @@ import MatIcon from "../components/icons/MatIcon";
 import AuthHelper from "../helpers/AuthHelper";
 import { Redirect } from "react-router-dom";
 import { useMutation } from "@apollo/react-hooks";
-import { USERS_GET_TOKEN, USERS_GET_ME } from "../helpers/UsersGraphQL";
-import { COMPLAINTS } from "../helpers/GraphQL";
+import { USERS_GET_TOKEN } from "../helpers/UsersGraphQL";
 import { APP_NAME } from "../conf";
 
 function LoginPage(props) {
   const [formData, setFormData] = useState(new Map());
   const [redirect, setRedirect] = useState(null);
-  const [login, { loading, client }] = useMutation(USERS_GET_TOKEN);
+  const [login, { client }] = useMutation(USERS_GET_TOKEN);
   function handleSubmit(e) {
     e.preventDefault();
     client.clearStore();
@@ -38,43 +37,43 @@ function LoginPage(props) {
   return redirect ? (
     <Redirect to={redirect} />
   ) : (
-    <>
-      <div className="login-page box-shadow">
-        <div className="login-header d-flex mb-1 p-1">
-          <h3>{APP_NAME}</h3>
-          <img
-            src={
-              process.env.PUBLIC_URL + "/static/images/complaints_register.png"
-            }
-            alt="Image"
-          />
+      <>
+        <div className="login-page box-shadow">
+          <div className="login-header d-flex mb-1 p-1">
+            <h3>{APP_NAME}</h3>
+            <img
+              src={
+                process.env.PUBLIC_URL + "/static/images/complaints_register.png"
+              }
+              alt="Image"
+            />
+          </div>
+          <form className="form" onSubmit={handleSubmit}>
+            <div className="mt-1">
+              <Input
+                name="username"
+                label="Username"
+                onChange={handleChange}
+                required
+              />
+              <Input
+                name="password"
+                label="Password"
+                type="password"
+                onChange={handleChange}
+                required
+              />
+            </div>
+            <div className="form-footer">
+              <button>
+                <span className="mr-1">Login</span>
+                <MatIcon name="login" />
+              </button>
+            </div>
+          </form>
         </div>
-        <form className="form" onSubmit={handleSubmit}>
-          <div className="mt-1">
-            <Input
-              name="username"
-              label="Username"
-              onChange={handleChange}
-              required
-            />
-            <Input
-              name="password"
-              label="Password"
-              type="password"
-              onChange={handleChange}
-              required
-            />
-          </div>
-          <div className="form-footer">
-            <button>
-              <span className="mr-1">Login</span>
-              <MatIcon name="login" />
-            </button>
-          </div>
-        </form>
-      </div>
-    </>
-  );
+      </>
+    );
 }
 
 export default LoginPage;
