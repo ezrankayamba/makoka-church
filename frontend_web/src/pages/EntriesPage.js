@@ -113,6 +113,7 @@ function EntriesPage() {
               handleSubmit={handleSubmit}
               filter={filter}
               handleExport={handleExport}
+
             />
           )}
         </div>

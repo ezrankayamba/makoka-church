@@ -18,13 +18,13 @@ function FilterForm({ handleSubmit, handleExport, filter = {} }) {
       name: "dateFrom",
       label: "From",
       type: "date",
-      defaultValue: Dates.fmt(Date.now()),
+      defaultValue: filter["dateFrom"] || Dates.fmt(Date.now()),
     },
     {
       name: "dateTo",
       label: "To",
       type: "date",
-      defaultValue: Dates.fmt(Date.now()),
+      defaultValue: filter["dateTo"] || Dates.fmt(Date.now()),
     },
   ];
   function handleChange(e) {
