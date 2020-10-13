@@ -22,7 +22,7 @@ function NewEntryPage({ filter }) {
   const [message, setMessage] = useState(null);
   const defaultData = new Map()
   defaultData['entryType'] = 0
-  defaultData['createdAt'] = Dates.fmt(Date.now()) + " 00:00"
+  defaultData['createdAt'] = Dates.fmt(Date.now(), true)
   const [formData, setFormData] = useState(defaultData);
   const [createEntry, { loading }] = useMutation(CREATE_ENTRY);
   const [createEntity, { }] = useMutation(CREATE_ENTITY);
@@ -34,7 +34,7 @@ function NewEntryPage({ filter }) {
     if (formData['entity'] && formData['amount']) {
       createEntry({
         variables: {
-          ...formData, createdAt: formData['createdAt'].replace(" ", "T")
+          ...formData, createdAt: formData['createdAt'].split(" ")[0]
         },
         refetchQueries: () => [
           { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS, filter } },
@@ -100,7 +100,7 @@ function NewEntryPage({ filter }) {
               type="datetime-local"
               onChange={handleChange}
               required
-              defaultValue={Dates.fmt(Date.now()) + "T00:00"}
+              defaultValue={Dates.fmt(Date.now(), true)}
             />
             <CreatableSelect
               name="entryType"
