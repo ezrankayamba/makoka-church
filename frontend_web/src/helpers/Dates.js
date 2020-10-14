@@ -16,7 +16,6 @@ export const Dates = {
     let dateStr = [year, month, day].join("-")
     let timeStr = `${hour}:${minutes < 10 ? "0" + minutes : minutes}:00.00`
     let res = timeIncl ? dateStr + "T" + timeStr : dateStr;
-    console.log(res)
     return res
   },
 };

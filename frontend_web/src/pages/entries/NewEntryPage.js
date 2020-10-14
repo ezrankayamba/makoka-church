@@ -82,14 +82,6 @@ function NewEntryPage({ filter }) {
     <Redirect to={redirect} />
   ) : (
       <div>
-        <div className="toolbar">
-          <div className="titlebar">
-            <NavLink to="/entries" className="btn btn-light mr-1">
-              <MatIcon name="keyboard_arrow_left" />
-            </NavLink>
-            <h5>Register New Entry</h5>
-          </div>
-        </div>
         {loading && <p>Sending ....</p>}
 
         <form className="form" onSubmit={handleSubmit} autoComplete={"off"}>
