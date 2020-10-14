@@ -17,13 +17,17 @@
   padding-bottom: 0.8rem;
 }
 .login-page .input-wrap input {
-  padding: 0.7rem;
+  padding: 0.4rem;
 }
 .login-page .login-header {
-  background: var(--color-brand);
+  /* background: var(--color-brand); */
   color: var(--color-primary);
   margin-bottom: 2rem;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 3px solid var(--color-primary);
 }
 
 @media only screen and (max-width: 600px) {
