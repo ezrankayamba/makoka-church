@@ -39,11 +39,7 @@
   justify-content: flex-end;
 }
 
-@media only screen and (min-width: 768px) {
-  .modal-main {
-    right: 1.2rem;
-  }
-}
+
 
 .display-block {
   display: inline-block;
@@ -67,4 +63,11 @@
 }
 .close-button:hover {
   color: #f1f1f1;
+}
+
+
+@media only screen and (max-width: 600px) {
+  .modal-main {
+    width: 95vw;
+  }
 }
