@@ -19,15 +19,15 @@ function EntriesPage() {
   useProfile();
   const [pageNo, setPageNo] = useState(1);
   const [filter, setFilter] = useState(new Map());
-  const [getEntries, { loading, data, error }] = useLazyQuery(GET_ENTRIES, {
+  const [getEntries, { data, refetch }] = useLazyQuery(GET_ENTRIES, {
     variables: { pageSize: PAGE_SIZE, pageNo: pageNo, ...filter },
   });
   const [isOpen, setIsOpen] = useState(false)
+  const [newEntry, setNewEntry] = useState(0)
 
 
   useEffect(() => {
     const abortCtrl = new AbortController();
-    console.log("Start");
     getEntries();
 
     return function cleanup() {
@@ -35,15 +35,18 @@ function EntriesPage() {
     };
   }, [pageNo, filter]);
 
+  const onNewEntry = (id) => {
+    refetch()
+    setNewEntry(id)
+  }
+
   function handleSubmit(formData) {
-    console.log(formData);
     let params = new Map();
     for (const [key, value] of Object.entries(formData)) {
       if (value) {
         params[key] = value;
       }
     }
-    console.log("Params: ", params);
     setFilter(params);
     setPageNo(1);
   }
@@ -130,11 +133,11 @@ function EntriesPage() {
               />
             )}
           </div>
-          <EntrySummary filter={filter} />
+          <EntrySummary filter={filter} newEntry={newEntry} />
         </div>
       </Route>
       {isOpen && <Modal onClose={onClose} title={"Register New Entry"}>
-        <NewEntryPage />
+        <NewEntryPage onSuccess={onNewEntry} />
       </Modal>}
     </>
   );

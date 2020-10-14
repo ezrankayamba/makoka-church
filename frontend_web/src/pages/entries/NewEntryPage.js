@@ -14,7 +14,7 @@ import CreatableSelect from "../../components/forms/CreatableSelect";
 import useProfile from "../../components/hooks/useProfile";
 import { Dates } from "../../helpers/Dates";
 
-function NewEntryPage({ filter }) {
+function NewEntryPage({ filter, onSuccess }) {
   useProfile()
   const entryTypes = [{ id: 0, name: "Revenue" }, { id: 1, name: "Expense" }]
   let entities = useQuery(GET_ENTITIES);
@@ -36,10 +36,10 @@ function NewEntryPage({ filter }) {
         variables: {
           ...formData, createdAt: formData['createdAt'].split(" ")[0]
         },
-        refetchQueries: () => [
-          { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS, filter } },
-          { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS_NO_PAGES, ...filter } },
-        ],
+        // refetchQueries: () => [
+        //   { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS, filter } },
+        //   { query: GET_ENTRIES, variables: { ...ENTRIES_FILTER_VARS_NO_PAGES, ...filter } },
+        // ],
         awaitRefetchQueries: true,
       }).then(
         (res) => {
@@ -47,7 +47,9 @@ function NewEntryPage({ filter }) {
           // window.location.reload();
           console.log(res)
           setFormData({ ...formData, amount: "", entity: null })
-          setMessage({ error: false, text: `Successfully recorded an entry: ${res.data.createEntry.result.id}` })
+          let entryId = res.data.createEntry.result.id
+          setMessage({ error: false, text: `Successfully recorded an entry: ${entryId}` })
+          onSuccess(entryId)
         },
         (res) => {
           console.log("Error: ", res)
@@ -57,7 +59,6 @@ function NewEntryPage({ filter }) {
     } else {
       setMessage({ error: true, text: "Fill in amount & entity" })
     }
-
   }
   function handleChange(e) {
     const { value, name } = e.target;

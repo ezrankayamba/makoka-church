@@ -6,6 +6,9 @@
   color: #fff;
   font-size: 0.7em;
 }
+.btn.btn-no-bg {
+  background: none;
+}
 a.btn {
   font-size: 0.8em;
 }

@@ -5,8 +5,8 @@ import { ENTRIES_FILTER_VARS_NO_PAGES } from '../../constants';
 import { GET_ENTRIES } from '../../helpers/GraphQL';
 import Numbers from '../../helpers/Numbers';
 
-function EntrySummary({ filter }) {
-    const [getEntries, { loading, data, error }] = useLazyQuery(GET_ENTRIES, {
+function EntrySummary({ filter, newEntry }) {
+    const [getEntries, { loading, data, error, refetch }] = useLazyQuery(GET_ENTRIES, {
         variables: { ...ENTRIES_FILTER_VARS_NO_PAGES, ...filter },
     });
     useEffect(() => {
@@ -17,6 +17,16 @@ function EntrySummary({ filter }) {
             abortCtrl.abort();
         };
     }, [filter]);
+
+    useEffect(() => {
+        console.log("New Entry: ", newEntry)
+        const abortCtrl = new AbortController();
+        if (refetch) refetch();
+
+        return function cleanup() {
+            abortCtrl.abort();
+        };
+    }, [newEntry]);
 
     if (loading || loading) return <p>Loading...</p>;
     if (error || error) return <p>Error :(</p>;

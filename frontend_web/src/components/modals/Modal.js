@@ -13,7 +13,7 @@ function Modal({ onClose, title, children, posx, posy, ...props }) {
           <div className="btn-group">
             <button
               type="button"
-              className="btn text-warning m-1"
+              className="btn btn-no-bg text-warning m-1 close-button"
               onClick={onClose}
             >
               <MatIcon name="close" />

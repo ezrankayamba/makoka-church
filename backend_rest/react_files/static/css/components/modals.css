@@ -58,11 +58,12 @@
 }
 
 .modal-header {
-  background: #000033;
-  color: #e1e1e1;
+  border-bottom: 1px solid var(--color-light);
+  color: var(--color-light);
 }
+.btn.close-button,
 .close-button {
-  color: #e1e1e1;
+  color: var(--color-light);
 }
 .close-button:hover {
   color: #f1f1f1;
