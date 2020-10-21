@@ -14,6 +14,14 @@ def fmt_date(df, columns):
     return df
 
 
+def get_type_name(num):
+    if num == 0:
+        return 'Revenue'
+    if num == 1:
+        return 'Expense'
+    return 'Unknown'
+
+
 def export_entries(request):
     kwargs = request.GET
     params = {}
@@ -22,12 +30,11 @@ def export_entries(request):
     if 'date_from' in kwargs:
         params['created_at__gt'] = kwargs['date_from']
     if 'date_to' in kwargs:
-        params['created_at__lt'] = kwargs['date_to'] + \
-            datetime.timedelta(days=1)
+        params['created_at__lt'] = kwargs['date_to'] + datetime.timedelta(days=1)
     print(params)
     qs = models.Entry.objects.filter(**params)
     fields = [
-        'id', 'entity__name', 'amount', 'created_at'
+        'id', 'entity__name', 'amount', 'created_at', 'entry_type'
     ]
     df = read_frame(qs, fieldnames=fields)
     df = df.rename(
@@ -35,6 +42,7 @@ def export_entries(request):
             'entity__name': 'entity'
         })
     df = fmt_date(df, ['created_at'])
+    df['entry_type'] = df['entry_type'].apply(get_type_name)
     with BytesIO() as b:
         writer = pd.ExcelWriter(b, engine='xlsxwriter')
         df.to_excel(writer, sheet_name='Entries', index=False)
