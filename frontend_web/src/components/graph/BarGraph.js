@@ -36,6 +36,15 @@ const BarGraph = ({
         displayColors: true,
         callbacks: {
           mode: "x",
+          label: function (tooltipItem, data) {
+            let label = data.datasets[tooltipItem.datasetIndex].label || '';
+
+            if (label) {
+              label += ': ';
+            }
+            label += Numbers.fmt(tooltipItem.yLabel);
+            return label;
+          }
         },
       },
       scales: {
