@@ -13,6 +13,7 @@ class Entity(models.Model):
 
     class Meta:
         verbose_name_plural = 'Entities'
+        ordering = ['name']
 
 
 class Entry(models.Model):
