@@ -43,6 +43,7 @@ def export_entries(request):
         })
     df = fmt_date(df, ['created_at'])
     df['entry_type'] = df['entry_type'].apply(get_type_name)
+    df['amount'] = pd.to_numeric(df['amount'])
     with BytesIO() as b:
         writer = pd.ExcelWriter(b, engine='xlsxwriter')
         df.to_excel(writer, sheet_name='Entries', index=False)
