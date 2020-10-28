@@ -44,6 +44,12 @@ class RevenueSummaryType(graphene.ObjectType):
     total = graphene.Int()
 
 
+class RevenueExpensesSummaryType(graphene.ObjectType):
+    date = graphene.String()
+    cat = graphene.String()
+    total = graphene.Int()
+
+
 class TitheSummaryType(graphene.ObjectType):
     date = graphene.String()
     total = graphene.Int()
@@ -64,6 +70,7 @@ class Query(object):
     me = graphene.Field(UserType)
     user = graphene.Field(UserType, id=graphene.ID())
     revenue_summary = graphene.List(RevenueSummaryType)
+    revenue_expenses_summary = graphene.List(RevenueExpensesSummaryType)
     tithe_summary = graphene.List(TitheSummaryType)
 
     @login_required
@@ -82,6 +89,11 @@ class Query(object):
     @login_required
     def resolve_revenue_summary(self, info, **kwargs):
         qs = reports.get_revenue_summary()
+        return qs
+
+    @login_required
+    def resolve_revenue_expenses_summary(self, info, **kwargs):
+        qs = reports.get_rev_exp_summary()
         return qs
 
     @login_required

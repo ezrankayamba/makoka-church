@@ -29,3 +29,9 @@ def get_tithe_summary():
     qs = models.Entry.objects.filter(~Q(entity__name__icontains='SADAKA'), entry_type=0, created_at__gt=date_from_limit()).annotate(
         date=Cast('created_at', DateField())).values('date').annotate(total=Count('id')).order_by('date')
     return qs
+
+
+def get_rev_exp_summary():
+    qs = models.Entry.objects.filter(created_at__gt=date_from_limit()).annotate(date=Cast('created_at', DateField()),
+                                                                                cat=Case(When(entry_type=0, then=Value('REVENUE')), default=Value('EXPENSES'), output_field=CharField())).values('date', 'cat').annotate(total=Sum('amount')).order_by('date')
+    return qs

@@ -9,7 +9,15 @@ export const REVENUE_SUMMARY = gql`
     }
   }
 `;
-
+export const REVENUE_EXPENSES_SUMMARY = gql`
+  query revenueExpensesSummary {
+    revenueExpensesSummary {
+      date
+      cat
+      total
+    }
+  }
+`;
 export const TITHE_SUMMARY = gql`
   query titheSummary {
     titheSummary {
