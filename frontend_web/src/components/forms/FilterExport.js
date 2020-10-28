@@ -1,4 +1,5 @@
 import React from "react";
+import DropdownButton from "./DropdownButton";
 import Input from "./Input";
 import Select from "./Select";
 
@@ -7,8 +8,9 @@ function FilterExport({
   handleChange,
   handleSubmit,
   filter,
-  handleExport,
+  exportActions
 }) {
+
   return (
     <div className="filter-export  w-100">
       <form className="form d-flex align-bottom" onSubmit={handleSubmit}>
@@ -23,14 +25,15 @@ function FilterExport({
         </div>
         <div className="d-flex">
           <button name="filter">Filter</button>
-          <button
+          {/* <button
             className="ml-1"
             name="export"
             type="button"
             onClick={handleExport}
           >
             Export
-          </button>
+          </button> */}
+          <DropdownButton actions={exportActions} label="Export" />
         </div>
       </form>
     </div>

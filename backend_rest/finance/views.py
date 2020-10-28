@@ -7,6 +7,7 @@ import pandas as pd
 from django.db.models import Count, F, Value
 import datetime
 from . import utils
+from django.db.models import Sum, Count
 
 
 def fmt_date(df, columns):
@@ -40,6 +41,26 @@ def export_entries(request):
     df = fmt_date(df, ['created_at'])
     df['entry_type'] = df['entry_type'].apply(get_type_name)
     df['amount'] = pd.to_numeric(df['amount'])
+    with BytesIO() as b:
+        writer = pd.ExcelWriter(b, engine='xlsxwriter')
+        df.to_excel(writer, sheet_name='Entries', index=False)
+        writer.save()
+        return HttpResponse(b.getvalue(), content_type='application/vnd.ms-excel')
+
+
+def export_entries_aggregated(request):
+    kwargs = request.GET
+    print(kwargs)
+    params = utils.params_entry_filter(kwargs)
+    qs = models.Entry.objects.filter(**params).values('entity__name', 'entry_type').annotate(total=Sum('amount'))
+    fields = ['entity__name', 'total',  'entry_type']
+    df = pd.DataFrame.from_dict(qs)
+    df = df.rename(
+        columns={
+            'entity__name': 'entity'
+        })
+    df['entry_type'] = df['entry_type'].apply(get_type_name)
+    df['total'] = pd.to_numeric(df['total'])
     with BytesIO() as b:
         writer = pd.ExcelWriter(b, engine='xlsxwriter')
         df.to_excel(writer, sheet_name='Entries', index=False)

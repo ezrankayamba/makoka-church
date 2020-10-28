@@ -34,3 +34,29 @@ a.link {
   align-items: center;
   background: transparent;
 }
+
+.dropdown-button{
+  position: relative;
+  display: inline-block;
+  z-index: 1000;
+}
+.dropdown-button button {
+  /* border-radius: 0; */
+  padding: .3em 1em;
+}
+.dropdown-button ul{
+  border: 1px solid rgb(223, 215, 215);
+  position: fixed;
+}
+.dropdown-button ul li {
+  border-bottom: 1px solid rgb(223, 215, 215);
+  font-size: .65em;
+  white-space: nowrap;
+  padding: .8em 1em;
+  cursor: pointer;
+  color: #333;
+  /* background: #fff; */
+}
+.dropdown-button ul li:last-child{
+  border-bottom: none;
+}

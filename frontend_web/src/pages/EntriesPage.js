@@ -67,7 +67,30 @@ function EntriesPage() {
         var url = window.URL.createObjectURL(blob);
         var a = document.createElement("a");
         a.href = url;
-        a.download = "Export.xlsx";
+        a.download = `Export_${Date.now()}.xlsx`;
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+      });
+  }
+
+  function handleExportAggregated(formData) {
+    let params = new Map();
+    for (const [key, value] of Object.entries(formData)) {
+      if (value) {
+        params[key] = value;
+      }
+    }
+    let q = Object.keys(params)
+      .map((key) => key + "=" + params[key])
+      .join("&");
+    fetch(`${BASE_URL}/export-entries-aggregated?${q}`)
+      .then((response) => response.blob())
+      .then((blob) => {
+        var url = window.URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = url;
+        a.download = `Export_Aggregated${Date.now()}.xlsx`;
         document.body.appendChild(a);
         a.click();
         a.remove();
@@ -77,7 +100,6 @@ function EntriesPage() {
   function handlePageChange(newPageNo) {
     setPageNo(newPageNo);
   }
-
   const columns = [
     { name: "id", label: "ID" },
     { name: "entity_name", label: "Entity" },
@@ -101,6 +123,13 @@ function EntriesPage() {
     : [];
 
   const onClose = () => setIsOpen(false)
+  const exportActions = [{
+    label: "Export Records",
+    clickHandler: () => handleExport(filter)
+  }, {
+    label: "Export Aggregated",
+    clickHandler: () => handleExportAggregated(filter)
+  }]
   return (
     <>
       <Route path="/entries" exact>
@@ -116,7 +145,8 @@ function EntriesPage() {
             <FilterForm
               handleSubmit={handleSubmit}
               filter={filter}
-              handleExport={handleExport}
+              // handleExport={handleExport}
+              exportActions={exportActions}
             />
           )}
         </div>

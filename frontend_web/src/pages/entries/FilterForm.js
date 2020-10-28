@@ -3,8 +3,7 @@ import { GET_ENTITIES } from "../../helpers/GraphQL";
 import FilterExport from "../../components/forms/FilterExport";
 import { Dates } from "../../helpers/Dates";
 
-function FilterForm({ handleSubmit, handleExport, filter = {} }) {
-  console.log(filter);
+function FilterForm({ handleSubmit, exportActions, filter = {} }) {
   const [formData, setFormData] = useState(filter);
   const searchFields = [
     {
@@ -38,7 +37,6 @@ function FilterForm({ handleSubmit, handleExport, filter = {} }) {
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value || null });
   }
-
   return (
     <FilterExport
       handleSubmit={(e) => {
@@ -47,10 +45,7 @@ function FilterForm({ handleSubmit, handleExport, filter = {} }) {
       }}
       fields={searchFields}
       handleChange={handleChange}
-      handleExport={(e) => {
-        e.preventDefault();
-        handleExport(formData);
-      }}
+      exportActions={exportActions}
     />
   );
 }
