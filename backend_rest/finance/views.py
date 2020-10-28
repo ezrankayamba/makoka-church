@@ -28,9 +28,9 @@ def export_entries(request):
     if 'entity' in kwargs:
         params['entity_id'] = kwargs['entity']
     if 'date_from' in kwargs:
-        params['created_at__gt'] = kwargs['date_from']
+        params['created_at__gt'] = kwargs['dateFrom']
     if 'date_to' in kwargs:
-        params['created_at__lt'] = kwargs['date_to'] + datetime.timedelta(days=1)
+        params['created_at__lt'] = kwargs['dateTo'] + datetime.timedelta(days=1)
     print(params)
     qs = models.Entry.objects.filter(**params)
     fields = [
