@@ -1,6 +1,7 @@
 import React from "react";
 import Chart from "chart.js";
 import { useEffect } from "react";
+import Numbers from "../../helpers/Numbers"
 
 const BarGraph = ({
   graphId,
@@ -10,6 +11,7 @@ const BarGraph = ({
   type = "bar",
   stacked = false,
 }) => {
+
   useEffect(() => {
     const data = {
       datasets: meta.data,
@@ -55,7 +57,7 @@ const BarGraph = ({
               },
               userCallback: function (label, index, labels) {
                 if (Math.floor(label) === label) {
-                  return label;
+                  return Numbers.fmt(label);
                 }
               },
             },

@@ -19,7 +19,7 @@ function TitheByDateGraph(props) {
     })
     .filter((v, i, a) => a.indexOf(v) === i);
   let res = [{
-    label: 'Tithe count',
+    label: 'Members',
     backgroundColor: ColorsHelper.randomColor(),
     data: data.titheSummary.map(d => d.total)
   }];
@@ -34,7 +34,7 @@ function TitheByDateGraph(props) {
     <BarGraph
       stacked={false}
       meta={meta}
-      title="Tithe By Date"
+      title="Tithing Members By Date"
       graphId="tithe-date-summary"
     />
   );
