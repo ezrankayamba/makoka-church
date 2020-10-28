@@ -6,6 +6,7 @@ from io import BytesIO
 import pandas as pd
 from django.db.models import Count, F, Value
 import datetime
+from . import utils
 
 
 def fmt_date(df, columns):
@@ -24,13 +25,8 @@ def get_type_name(num):
 
 def export_entries(request):
     kwargs = request.GET
-    params = {}
-    if 'entity' in kwargs:
-        params['entity_id'] = kwargs['entity']
-    if 'date_from' in kwargs:
-        params['created_at__gt'] = kwargs['dateFrom']
-    if 'date_to' in kwargs:
-        params['created_at__lt'] = kwargs['dateTo'] + datetime.timedelta(days=1)
+    print(kwargs)
+    params = utils.params_entry_filter(kwargs)
     print(params)
     qs = models.Entry.objects.filter(**params)
     fields = [

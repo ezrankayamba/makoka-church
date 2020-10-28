@@ -1,6 +1,5 @@
 import React from "react";
 import Chart from "chart.js";
-import Numbers from "../../helpers/Numbers";
 import { useEffect } from "react";
 
 const BarGraph = ({
@@ -66,6 +65,7 @@ const BarGraph = ({
       },
     };
 
+    console.log("Data: ", data)
     new Chart(document.getElementById(graphId), {
       type: type,
       data: data,

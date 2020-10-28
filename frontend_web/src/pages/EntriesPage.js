@@ -84,7 +84,6 @@ function EntriesPage() {
     { name: "amount", label: "Amount" },
     { name: "entryType", label: "Entry Type" },
     { name: "createdAt", label: "Created" },
-    // { name: "updatedAt", label: "Updated" },
   ];
   const fmtDate = (strDate) => {
     let parsed = Date.parse(strDate);
@@ -118,7 +117,6 @@ function EntriesPage() {
               handleSubmit={handleSubmit}
               filter={filter}
               handleExport={handleExport}
-
             />
           )}
         </div>

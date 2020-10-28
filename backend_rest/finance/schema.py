@@ -11,6 +11,7 @@ import datetime
 from . import reports
 import base64
 from django.core.files.base import ContentFile
+from . import utils
 
 DEFAULT_PASS = 'testing321'
 
@@ -37,6 +38,17 @@ class FileType(graphene.InputObjectType):
     data = graphene.String()
 
 
+class RevenueSummaryType(graphene.ObjectType):
+    date = graphene.String()
+    cat = graphene.String()
+    total = graphene.Int()
+
+
+class TitheSummaryType(graphene.ObjectType):
+    date = graphene.String()
+    total = graphene.Int()
+
+
 class Query(object):
     entities = graphene.List(EntityType)
     entries = graphene.List(
@@ -44,29 +56,20 @@ class Query(object):
         page_no=graphene.Int(),
         page_size=graphene.Int(),
         entity=graphene.Int(),
+        entry_type=graphene.Int(),
         date_from=graphene.Date(),
         date_to=graphene.Date()
     )
     users = graphene.List(UserType)
     me = graphene.Field(UserType)
     user = graphene.Field(UserType, id=graphene.ID())
+    revenue_summary = graphene.List(RevenueSummaryType)
+    tithe_summary = graphene.List(TitheSummaryType)
 
     @login_required
     def resolve_entries(self, info, page_no=1, page_size=DEFAULT_PAGE_SIZE, **kwargs):
         print(kwargs)
-        params = {}
-        if 'entity' in kwargs:
-            params['entity_id'] = kwargs['entity']
-        if 'date_from' in kwargs:
-            params['created_at__gt'] = kwargs['date_from']
-        else:
-            params['created_at__gt'] = datetime.date.today()
-        if 'date_to' in kwargs:
-            params['created_at__lt'] = kwargs['date_to'] + \
-                datetime.timedelta(days=1)
-        else:
-            params['created_at__lt'] = datetime.date.today() + \
-                datetime.timedelta(days=1)
+        params = utils.params_entry_filter(kwargs)
         print(params)
         start = ((page_no - 1) * page_size)
         to = page_no * page_size
@@ -75,7 +78,16 @@ class Query(object):
             'entity').filter(**params)[start:to]
 
         return qs
-        # return models.Entry.objects.all()
+
+    @login_required
+    def resolve_revenue_summary(self, info, **kwargs):
+        qs = reports.get_revenue_summary()
+        return qs
+
+    @login_required
+    def resolve_tithe_summary(self, info, **kwargs):
+        qs = reports.get_tithe_summary()
+        return qs
 
     @login_required
     def resolve_entities(self, info, **kwargs):

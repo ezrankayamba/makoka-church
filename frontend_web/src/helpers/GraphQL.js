@@ -5,6 +5,7 @@ export const GET_ENTRIES = gql`
     $pageNo: Int
     $pageSize: Int
     $entity: Int
+    $entryType: Int
     $dateFrom: Date
     $dateTo: Date
   ) {
@@ -12,6 +13,7 @@ export const GET_ENTRIES = gql`
       pageNo: $pageNo
       pageSize: $pageSize
       entity: $entity
+      entryType: $entryType
       dateFrom: $dateFrom
       dateTo: $dateTo
     ) {

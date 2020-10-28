@@ -15,6 +15,13 @@ function FilterForm({ handleSubmit, handleExport, filter = {} }) {
       defaultValue: filter["entity"],
     },
     {
+      name: "entryType",
+      label: "Type",
+      type: "select",
+      options: [{ id: 0, name: "Revenue" }, { id: 1, name: "Expense" }],
+      defaultValue: filter["entryType"],
+    },
+    {
       name: "dateFrom",
       label: "From",
       type: "date",
