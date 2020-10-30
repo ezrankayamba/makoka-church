@@ -31,8 +31,14 @@ export const GET_ENTRIES = gql`
 `;
 
 export const GET_ENTITIES = gql`
-  query getEntities {
-    entities {
+  query getEntities(
+    $pageNo: Int
+    $pageSize: Int
+    ) {
+    entities(
+      pageNo: $pageNo
+      pageSize: $pageSize
+    ) {
       id
       name
       isMember

@@ -14,6 +14,7 @@ function EntitiesPage() {
     variables: { pageSize: PAGE_SIZE, pageNo: pageNo, ...filter },
   });
   useEffect(() => {
+    console.log("Use effect: ", pageNo)
     const abortCtrl = new AbortController();
     getEntities()
 
@@ -42,13 +43,14 @@ function EntitiesPage() {
     }))
     : [];
   function handlePageChange(newPageNo) {
+    console.log("New pageNo: ", newPageNo)
     setPageNo(newPageNo);
   }
   return <>
     <div className="toolbar">
-      <h5>List of members</h5>
+      <h5>List of entities</h5>
       <button className="btn">
-        <MatIcon name="add" text="New Member" />
+        <MatIcon name="add" text="New Entity" />
       </button>
     </div>
     <hr />

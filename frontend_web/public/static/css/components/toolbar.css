@@ -2,7 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #ebfaf8;
+  /* background: #ebfaf8; */
   padding: 0.2em;
 }
 .toolbar .titlebar {
