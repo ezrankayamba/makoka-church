@@ -35,6 +35,8 @@ export const GET_ENTITIES = gql`
     entities {
       id
       name
+      isMember
+      createdAt
     }
   }
 `;

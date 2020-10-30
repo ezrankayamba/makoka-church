@@ -21,6 +21,9 @@ function NavBar() {
             <li>
               <NavLink to="/entries">Entries</NavLink>
             </li>
+            <li>
+              <NavLink to="/entities">Entities</NavLink>
+            </li>
             {user && user.me && user.me.isSuperuser && (
               <li>
                 <NavLink to="/users">Users</NavLink>

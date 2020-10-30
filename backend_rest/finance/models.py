@@ -5,6 +5,7 @@ from datetime import datetime
 
 class Entity(models.Model):
     name = models.CharField(unique=True, max_length=100)
+    is_member = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
 

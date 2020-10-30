@@ -5,16 +5,13 @@ import {
   CREATE_ENTITY,
   CREATE_ENTRY,
   GET_ENTITIES,
-  GET_ENTRIES,
 } from "../../helpers/GraphQL";
-import MatIcon from "../../components/icons/MatIcon";
-import { NavLink, Redirect } from "react-router-dom";
-import { ENTRIES_FILTER_VARS, ENTRIES_FILTER_VARS_NO_PAGES } from "../../constants";
+import { Redirect } from "react-router-dom";
 import CreatableSelect from "../../components/forms/CreatableSelect";
 import useProfile from "../../components/hooks/useProfile";
 import { Dates } from "../../helpers/Dates";
 
-function NewEntryPage({ filter, onSuccess }) {
+function NewEntryPage({ onSuccess }) {
   useProfile()
   const entryTypes = [{ id: 0, name: "Revenue" }, { id: 1, name: "Expense" }]
   let entities = useQuery(GET_ENTITIES);
@@ -76,7 +73,7 @@ function NewEntryPage({ filter, onSuccess }) {
         let id = res.data.createEntity.result.id;
         setFormData({ ...formData, [name]: id });
       },
-      (res) => setMessage({ error: true, text: "Error creating entity" })
+      () => setMessage({ error: true, text: "Error creating entity" })
     );
   }
   return redirect ? (
