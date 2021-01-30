@@ -52,7 +52,7 @@ def export_entries_aggregated(request):
     kwargs = request.GET
     print(kwargs)
     params = utils.params_entry_filter(kwargs)
-    qs = models.Entry.objects.filter(**params).values('entity__name', 'entry_type').annotate(total=Sum('amount'))
+    qs = models.Entry.objects.filter(**params).values('entity__name', 'entry_type').annotate(total=Sum('amount'), count=Count('id'))
     fields = ['entity__name', 'total',  'entry_type']
     df = pd.DataFrame.from_dict(qs)
     df = df.rename(

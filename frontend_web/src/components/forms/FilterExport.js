@@ -25,14 +25,6 @@ function FilterExport({
         </div>
         <div className="d-flex">
           <button name="filter">Filter</button>
-          {/* <button
-            className="ml-1"
-            name="export"
-            type="button"
-            onClick={handleExport}
-          >
-            Export
-          </button> */}
           <DropdownButton actions={exportActions} label="Export" />
         </div>
       </form>
