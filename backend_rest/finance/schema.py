@@ -15,7 +15,7 @@ from . import utils
 
 DEFAULT_PASS = 'testing321'
 
-DEFAULT_PAGE_SIZE = 4
+DEFAULT_PAGE_SIZE = -1
 
 
 class UserType(DjangoObjectType):
@@ -106,18 +106,19 @@ class Query(object):
         return qs
 
     @login_required
-    def resolve_entities(self, info,  page_size,  page_no=1, **kwargs):
+    def resolve_entities(self, info, page_no=1, page_size=DEFAULT_PAGE_SIZE,  **kwargs):
         print(kwargs)
         params = {}
         # params = utils.params_entry_filter(kwargs)
         # print(params)
-        if page_size:
+       if page_size:
             start = ((page_no - 1) * page_size)
             to = page_no * page_size
             print(f'Start: {start}, To: {to}')
             qs = models.Entity.objects.filter(**params)[start:to]
         else:
             qs = models.Entity.objects.filter(**params)
+
         return qs
 
     @login_required
