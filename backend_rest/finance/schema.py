@@ -78,15 +78,17 @@ class Query(object):
     tithe_summary = graphene.List(TitheSummaryType)
 
     @login_required
-    def resolve_entries(self, info, page_no=1, page_size=DEFAULT_PAGE_SIZE, **kwargs):
+    def resolve_entries(self, info,  page_size, page_no=1, **kwargs):
         print(kwargs)
         params = utils.params_entry_filter(kwargs)
         print(params)
-        start = ((page_no - 1) * page_size)
-        to = page_no * page_size
-        print(f'Start: {start}, To: {to}')
-        qs = models.Entry.objects.select_related(
-            'entity').filter(**params)[start:to]
+        if page_size:
+            start = ((page_no - 1) * page_size)
+            to = page_no * page_size
+            print(f'Start: {start}, To: {to}')
+            qs = models.Entry.objects.select_related('entity').filter(**params)[start:to]
+        else:
+            qs = models.Entry.objects.select_related('entity').filter(**params)
 
         return qs
 
