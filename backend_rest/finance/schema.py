@@ -111,7 +111,7 @@ class Query(object):
         params = {}
         # params = utils.params_entry_filter(kwargs)
         # print(params)
-        if page_size:
+        if page_size > 0:
             start = ((page_no - 1) * page_size)
             to = page_no * page_size
             print(f'Start: {start}, To: {to}')
