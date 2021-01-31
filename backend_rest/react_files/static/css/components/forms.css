@@ -15,6 +15,7 @@
 }
 .form .inline-fields {
   display: flex;
+  flex-wrap: wrap;
 }
 .form .inline-fields .input-wrap {
   margin-right: 0.4em;
@@ -120,7 +121,7 @@
   height: 100%;
 }
 .filter-export {
-  overflow-x: auto;
+  /* overflow-x: auto; */
   background: rgb(253, 253, 253);
   padding: 0.4em;
 }
@@ -131,6 +132,11 @@
 .filter-export-select .fe__menu {
   z-index: 1000;
 }
+.Select-menu-outer {
+  z-index: 1000;
+  position:relative;
+}
+
 @media only screen and (max-width: 600px) {
   .form .form-grid-2 {
     grid-template-columns: 1fr;

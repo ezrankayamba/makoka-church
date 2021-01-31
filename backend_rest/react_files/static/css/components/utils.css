@@ -29,6 +29,7 @@ button {
   justify-content: space-between;
   /* align-items: center; */
   gap: .4rem;
+  flex-wrap: wrap;
 }
 .d-flex.align-left {
   justify-content: flex-start;

@@ -1,6 +1,8 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { USERS_GET_ME } from "../../helpers/UsersGraphQL";
+import CreatableSelect from "./CreatableSelect";
+import Dropdown from "../dropdown";
 
 function Select({ label, name, query, options = [], ...props }) {
   let { loading, data, error } = useQuery(query ? query.name : USERS_GET_ME, {
@@ -17,14 +19,14 @@ function Select({ label, name, query, options = [], ...props }) {
   return (
     <div className="input-wrap">
       <label htmlFor={name}>{label}</label>
-      <select name={name} id={name} {...props}>
-        <option value="">---Select---</option>
+      <Dropdown {...props} options={options} name={name} label={label}>
+        {/* <option value="">---Select---</option>
         {options.map((o) => (
           <option key={o.id} value={o.id}>
             {o.name}
           </option>
-        ))}
-      </select>
+        ))} */}
+      </Dropdown>
     </div>
   );
 }

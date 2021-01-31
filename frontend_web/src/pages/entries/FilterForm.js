@@ -34,12 +34,14 @@ function FilterForm({ handleSubmit, exportActions, filter = {} }) {
     },
   ];
   function handleChange(e) {
+    console.log(e);
     const { value, name } = e.target;
     setFormData({ ...formData, [name]: value || null });
   }
   return (
     <FilterExport
       handleSubmit={(e) => {
+        console.log(e, formData);
         e.preventDefault();
         handleSubmit(formData);
       }}

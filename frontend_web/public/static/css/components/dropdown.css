@@ -1,0 +1,79 @@
+
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown .dropdown-control{
+    display: flex;
+    /* background: green; */
+    align-items: center;
+    border: 1px solid rgb(180, 180, 180);
+    padding: .2em 0;
+    border-radius: .2em;
+}
+
+.dropdown-separator {
+    -webkit-align-self: stretch;
+    -ms-flex-item-align: stretch;
+    align-self: stretch;
+    background-color: rgb(180, 180, 180);
+    margin-bottom: 4px;
+    margin-top: 4px;
+    width: 1px;
+    box-sizing: border-box;
+}
+.dropdown .dropdown-control input {
+    border: none;
+}
+
+.dropdown .dropdown-arrow {
+    margin: 0 .4rem;
+}
+
+.dropdown .dropdown-arrow path {
+    fill: rgb(180, 180, 180);
+}
+
+.dropdown .dropdown-arrow:hover path,
+.dropdown:hover .dropdown-arrow path {
+    fill: rgb(138, 132, 132);
+}
+
+.dropdown .options{
+    position: absolute;
+    background: #fff;
+    top: 2.5em;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: .2em;
+    display: none;
+    width: 100%;
+}
+.dropdown .options.open{
+    display: block;
+    z-index: 999;
+}
+
+.dropdown .options li{
+    padding: .5em .8em;
+}
+
+.dropdown .options li:hover{
+    background: rgb(232, 246, 246);
+}
+
+.dropdown .options li.selected {
+    background: rgb(202, 228, 228);
+}
+.dropdown .dropdown-clear line {
+    stroke: rgb(180, 180, 180);
+}
+.dropdown .dropdown-clear{
+    margin: auto .5em;
+    height: 1em;
+    width: 1em;
+}
+.dropdown .dropdown-clear:hover line {
+    stroke: rgb(138, 132, 132);
+    cursor: pointer;
+}

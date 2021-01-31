@@ -10,6 +10,7 @@
 @import "./components/login.css";
 @import "./components/dashboard.css";
 @import "./components/complaint.css";
+@import "./components/dropdown.css";
 
 :root {
   --color-primary: #f5fc00;
