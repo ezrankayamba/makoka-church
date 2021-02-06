@@ -2,6 +2,7 @@
   display: grid;
   grid-template-columns: 1fr;
   gap: 0.4em;
+  padding: 1em;
 }
 .dashboard .card {
   border-radius: 5px;
