@@ -39,38 +39,40 @@ function LoginPage(props) {
   ) : (
       <>
         <div className="login-page box-shadow">
-          <div className="login-header d-flex mb-1 p-1">
-            <h3>{APP_NAME}</h3>
-            <img
-              src={
-                process.env.PUBLIC_URL + "/static/images/logo.png"
-              }
-              alt="Logo"
-            />
+          <div className="login-form">
+            <div className="login-header d-flex mb-1 p-1">
+              <h3>{APP_NAME}</h3>
+              <img
+                src={
+                  process.env.PUBLIC_URL + "/static/images/logo.png"
+                }
+                alt="Logo"
+              />
+            </div>
+            <form className="form" onSubmit={handleSubmit}>
+              <div className="mt-1">
+                <Input
+                  name="username"
+                  label="Username"
+                  onChange={handleChange}
+                  required
+                />
+                <Input
+                  name="password"
+                  label="Password"
+                  type="password"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              <div className="form-footer">
+                <button>
+                  <span className="mr-1">Login</span>
+                  <MatIcon name="login" />
+                </button>
+              </div>
+            </form>
           </div>
-          <form className="form" onSubmit={handleSubmit}>
-            <div className="mt-1">
-              <Input
-                name="username"
-                label="Username"
-                onChange={handleChange}
-                required
-              />
-              <Input
-                name="password"
-                label="Password"
-                type="password"
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="form-footer">
-              <button>
-                <span className="mr-1">Login</span>
-                <MatIcon name="login" />
-              </button>
-            </div>
-          </form>
         </div>
       </>
     );
