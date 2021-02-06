@@ -43,7 +43,7 @@ function UserManagementPage(props) {
         <div className="toolbar">
           <h5>List of users</h5>
           <NavLink
-            className="d-flex btn btn-light has-left-icon"
+            className="btn"
             to="/users/new-user"
           >
             <MatIcon name="add" text="New User" />

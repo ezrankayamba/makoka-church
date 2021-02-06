@@ -9,9 +9,10 @@
   display: flex;
   align-items: center;
 }
-.toolbar a.btn {
-  border: 0;
-  outline: none;
+/* .toolbar .btn {
+  /* border: 0; */
+  /* outline: none; */
   display: flex;
   justify-content: center;
-}
+  color: #444;
+} */

@@ -41,7 +41,6 @@ function EntrySummary({ filter, newEntry }) {
         <h5>Summary</h5>
         <div><div>Revenue: <br /><i><small>{revenues.length} record(s)</small></i></div> <span>{Numbers.fmt(totalRevenue)}</span></div>
         <div><div>Expense:<br /><i><small>{expenses.length} record(s)</small></i> </div><span>{Numbers.fmt(totalExpenses)}</span></div>
-        <hr />
         <div>Balance: <span>{Numbers.fmt(balance)}</span></div>
     </div>
 }

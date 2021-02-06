@@ -139,7 +139,6 @@ function EntriesPage() {
             <MatIcon name="add" text="New Entry" />
           </button>
         </div>
-        <hr />
         <div className="toolbar">
           {data && (
             <FilterForm

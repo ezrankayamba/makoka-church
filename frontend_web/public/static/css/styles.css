@@ -46,8 +46,8 @@ a {
 
 .summary {
   font-size: .8em;
-  /* border:1px solid  var(--color-light); */
-  /* padding: .4rem; */
+  border:1px solid  var(--color-light);
+  padding: .2em;
   color: var(--color-light);
 }
 .summary h5{

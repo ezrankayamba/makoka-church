@@ -2,6 +2,8 @@
   padding: .5em 1em;
   border: 1px solid #ddd;
   border-radius: 0.4em;
+  display: flex;
+  align-items: center;
   font-size: 0.7em;
 }
 .btn.btn-no-bg {

@@ -53,7 +53,6 @@ function EntitiesPage() {
         <MatIcon name="add" text="New Entity" />
       </button>
     </div>
-    <hr />
     <div className="toolbar">
 
     </div>
