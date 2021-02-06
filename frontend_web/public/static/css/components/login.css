@@ -30,6 +30,10 @@
   border-bottom: 3px solid var(--color-primary);
 }
 
+.login-page .form {
+  padding: 0 1em;
+}
+
 @media only screen and (max-width: 600px) {
   .login-page {
     width: 90vw;
