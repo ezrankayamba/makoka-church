@@ -2,7 +2,7 @@ import React from "react";
 
 function Input({ label, name, help, type = "text", cls, ...props }) {
   return (
-    <div className={`input-wrap ${cls || ""}`}>
+    <div className={`input-wrap ${type} ${cls || ""}`}>
       <label htmlFor={name}>{label}</label>
       {type === "textarea" ? (
         <textarea name={name} id={name} {...props} />

@@ -1,6 +1,24 @@
 from django.db import models
 from django.contrib.auth.models import User
-from datetime import datetime
+from datetime import datetime, date
+
+
+GENDER_CHOICES = [
+    ('F', 'Female'),
+    ('M', 'Male'),
+]
+
+
+def current_year():
+    return date.today().year
+
+
+class Person(models.Model):
+    gender = models.CharField(choices=GENDER_CHOICES, max_length=2)
+    is_married = models.BooleanField(default=False)
+    is_baptized = models.BooleanField(default=False)
+    year_joined = models.IntegerField(max_length=4, default=current_year)
+    education = models.CharField(max_length=100, null=True)
 
 
 class Entity(models.Model):
@@ -8,6 +26,7 @@ class Entity(models.Model):
     is_member = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
+    person = models.OneToOneField(Person, null=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -29,3 +48,4 @@ class Entry(models.Model):
 
     class Meta:
         verbose_name_plural = 'Entries'
+        ordering = ['-created_at', '-id']

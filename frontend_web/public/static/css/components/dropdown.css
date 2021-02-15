@@ -79,3 +79,7 @@
     stroke: rgb(138, 132, 132);
     cursor: pointer;
 }
+
+.dropdown-control input{
+    flex: 1;
+}

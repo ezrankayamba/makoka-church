@@ -43,6 +43,12 @@ export const GET_ENTITIES = gql`
       name
       isMember
       createdAt
+      person{
+        id
+        gender
+        isMarried
+        isBaptized
+      }
     }
   }
 `;
@@ -57,8 +63,17 @@ export const CREATE_ENTRY = gql`
   }
 `;
 export const CREATE_ENTITY = gql`
-  mutation createEntity($name: String!) {
-    createEntity(input: { name: $name }) {
+  mutation createEntity($name: String!, $isMember: Boolean) {
+    createEntity(input: { name: $name, isMember: $isMember }) {
+      result {
+        id
+      }
+    }
+  }
+`;
+export const UPDATE_ENTITY = gql`
+  mutation updateEntity($id: ID, $name: String!, $isMember: Boolean, $gender: String, $isMarried: Boolean, $isBaptized: Boolean) {
+    updateEntity(input: {id: $id, name: $name, isMember: $isMember, gender: $gender, isMarried: $isMarried, isBaptized: $isBaptized}) {
       result {
         id
       }

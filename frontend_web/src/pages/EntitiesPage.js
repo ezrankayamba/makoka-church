@@ -5,10 +5,15 @@ import MatIcon from "../components/icons/MatIcon";
 import Pagination from "../components/tables/Pagination";
 import Table from "../components/tables/Table";
 import { GET_ENTITIES } from "../helpers/GraphQL";
+import Modal from "../components/modals/Modal"
+import EntityForm from "./entities/EntityForm";
+
+
 const PAGE_SIZE = 10;
 function EntitiesPage() {
   useProfile();
   const [pageNo, setPageNo] = useState(1);
+  const [entity, setEntity] = useState(null);
   const [filter, setFilter] = useState(new Map());
   const [getEntities, { data, refetch }] = useLazyQuery(GET_ENTITIES, {
     variables: { pageSize: PAGE_SIZE, pageNo: pageNo, ...filter },
@@ -29,7 +34,7 @@ function EntitiesPage() {
     { name: "name", label: "Name" },
     { name: "isMember", label: "Is Member" },
     { name: "createdAt", label: "Created" },
-    { name: "action", render: (row) => <button className="btn ripple">View</button> },
+    { name: "action", render: (row) => <button className="btn ripple" onClick={() => setEntity(row)}>View</button> },
   ];
   const fmtDate = (strDate) => {
     let parsed = Date.parse(strDate);
@@ -68,6 +73,7 @@ function EntitiesPage() {
         )}
       </div>
     </div>
+    {entity && <EntityForm entity={entity} onClose={() => setEntity(null)} />}
   </>
 }
 
