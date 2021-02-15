@@ -25,6 +25,7 @@
   flex-direction: column;
   /* height: 100%; */
 }
+
 .form .input-wrap label {
   padding: 0.4em 0 0.1em;
   font-size: 0.9em;
@@ -45,7 +46,21 @@
   outline: none;
   /* height: 100%; */
 }
-
+.form .input-wrap.checkbox{
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  direction: rtl;
+  justify-content: center;
+  gap: .4em;
+  padding: 1em 0;
+}
+.form .input-wrap.checkbox input{
+  min-width: 0;
+}
+.form .input-wrap.checkbox label{
+  padding: 0;
+}
 .form .form-footer {
   background: rgb(250, 250, 255);
   padding: 0.4em;
