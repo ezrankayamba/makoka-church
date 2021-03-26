@@ -17,7 +17,7 @@ class Person(models.Model):
     gender = models.CharField(choices=GENDER_CHOICES, max_length=2)
     is_married = models.BooleanField(default=False)
     is_baptized = models.BooleanField(default=False)
-    year_joined = models.IntegerField(max_length=4, default=current_year)
+    year_joined = models.IntegerField(default=current_year)
     education = models.CharField(max_length=100, null=True)
 
 
