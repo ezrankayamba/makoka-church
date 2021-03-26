@@ -26,7 +26,7 @@ class Entity(models.Model):
     is_member = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
-    person = models.OneToOneField(Person, null=True, on_delete=models.SET_NULL)
+    person = models.OneToOneField(Person, null=True, on_delete=models.SET_NULL, blank=True)
 
     def __str__(self):
         return self.name
