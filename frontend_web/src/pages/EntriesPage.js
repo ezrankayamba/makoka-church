@@ -75,6 +75,7 @@ function EntriesPage() {
   }
 
   function handleExportAggregated(formData) {
+    console.log(formData)
     let params = new Map();
     for (const [key, value] of Object.entries(formData)) {
       if (value) {
