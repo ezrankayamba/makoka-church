@@ -24,6 +24,10 @@ def get_type_name(num):
     return 'Unknown'
 
 
+def get_max_tag(entity_id):
+    return models.Entity.objects.get(pk=entity_id).max_tag
+
+
 def export_entries(request):
     kwargs = request.GET
     print(kwargs)
@@ -52,14 +56,15 @@ def export_entries_aggregated(request):
     kwargs = request.GET
     print(kwargs)
     params = utils.params_entry_filter(kwargs)
-    qs = models.Entry.objects.filter(**params).values('entity__name', 'entry_type').annotate(total=Sum('amount'), count=Count('id')).order_by('entity__name')
-    fields = ['entity__name', 'total',  'entry_type']
+    qs = models.Entry.objects.filter(**params).values('entity__name', 'entry_type', 'entity__id').annotate(total=Sum('amount'), count=Count('id')).order_by('entity__name')
     df = pd.DataFrame.from_dict(qs)
     df = df.rename(
         columns={
-            'entity__name': 'entity'
+            'entity__name': 'entity',
+            'entity__id': 'tag'
         })
     df['entry_type'] = df['entry_type'].apply(get_type_name)
+    df['tag'] = df['tag'].apply(get_max_tag)
     df['total'] = pd.to_numeric(df['total'])
     with BytesIO() as b:
         writer = pd.ExcelWriter(b, engine='xlsxwriter')

@@ -1,24 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from core.models import Person, TAG_TYPE_BARAZA_KUU
 from datetime import datetime, date
-
-
-GENDER_CHOICES = [
-    ('F', 'Female'),
-    ('M', 'Male'),
-]
 
 
 def current_year():
     return date.today().year
-
-
-class Person(models.Model):
-    gender = models.CharField(choices=GENDER_CHOICES, max_length=2)
-    is_married = models.BooleanField(default=False)
-    is_baptized = models.BooleanField(default=False)
-    year_joined = models.IntegerField(default=current_year)
-    education = models.CharField(max_length=100, null=True)
 
 
 class Entity(models.Model):
@@ -26,10 +13,17 @@ class Entity(models.Model):
     is_member = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now=True)
-    person = models.OneToOneField(Person, null=True, on_delete=models.SET_NULL, blank=True)
+    person = models.OneToOneField(Person, null=True, on_delete=models.PROTECT)
 
     def __str__(self):
         return self.name
+
+    def max_tag_(self):
+        if not self.person:
+            return None
+        tag = self.person.tags.filter(type=TAG_TYPE_BARAZA_KUU).first()
+        return str(tag) if tag else None
+    max_tag = property(max_tag_)
 
     class Meta:
         verbose_name_plural = 'Entities'
@@ -42,6 +36,7 @@ class Entry(models.Model):
     entry_type = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=False, null=True)
     updated_at = models.DateTimeField(auto_now=True)
+    created_by = models.ForeignKey(User, on_delete=models.PROTECT, null=True)
 
     def __str__(self):
         return f'{self.entity.name}: {self.amount} on {self.created_at.strftime("%d/%m/%Y")}'

@@ -20,7 +20,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'finance', 'django.contrib.admin', 'django.contrib.auth',
+    'finance.apps.FinanceConfig', 'django.contrib.admin', 'django.contrib.auth',
     'django.contrib.contenttypes', 'django.contrib.sessions',
     'django.contrib.messages', 'django.contrib.staticfiles', 'graphene_django',
     'web', 'graphql_auth', 'core'
