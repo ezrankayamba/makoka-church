@@ -17,6 +17,13 @@ TAG_TYPES = [
     (TAG_TYPE_CELL, TAG_TYPE_CELL),
 ]
 
+BATCH_STATUS_INITIATED = "Initiated"
+BATCH_STATUS_PROCESSED = "Processed"
+BATCH_STATUS_LIST = [
+    (BATCH_STATUS_INITIATED, BATCH_STATUS_INITIATED),
+    (BATCH_STATUS_PROCESSED, BATCH_STATUS_PROCESSED),
+]
+
 
 def current_year():
     return date.today().year
@@ -51,3 +58,16 @@ class Person(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Batch(models.Model):
+    file = models.FileField(upload_to='admin/batch')
+    message = models.CharField(max_length=300, null=True)
+    status = models.CharField(default='Initiated', max_length=20, choices=BATCH_STATUS_LIST)
+    created_at = models.DateTimeField(null=True, auto_now_add=True)
+
+    def __str__(self):
+        return self.file.name
+
+    class Meta:
+        verbose_name_plural = 'Batches'
