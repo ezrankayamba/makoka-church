@@ -61,13 +61,14 @@ class Person(models.Model):
 
 
 class Batch(models.Model):
+    title = models.CharField(max_length=50, null=True)
     file = models.FileField(upload_to='admin/batch')
     message = models.CharField(max_length=300, null=True)
     status = models.CharField(default='Initiated', max_length=20, choices=BATCH_STATUS_LIST)
     created_at = models.DateTimeField(null=True, auto_now_add=True)
 
     def __str__(self):
-        return self.file.name
+        return self.title if self.title else f'Untitled({self.id})'
 
     class Meta:
         verbose_name_plural = 'Batches'

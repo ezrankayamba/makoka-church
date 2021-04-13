@@ -26,10 +26,11 @@ class TagAdmin(admin.ModelAdmin):
 
 @admin.register(models.Batch)
 class BatchAdmin(admin.ModelAdmin):
-    list_display = ['message', 'file', 'status', 'created_at_']
-    # list_filter = ['status']
+    list_display = ['title', 'message', 'size', 'file', 'status', 'created_at_']
     form = forms.BatchForm
 
+    def size(self, obj):
+        return len(obj.message) if obj.message else 0
+
     def created_at_(self, obj):
-        print(obj)
         return obj.created_at.strftime("%d/%m/%y") if obj.created_at else None
