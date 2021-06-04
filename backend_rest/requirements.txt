@@ -1,6 +1,6 @@
 aniso8601==7.0.0
 asgiref==3.2.10
-Django==3.1.2
+Django==3.1.9
 django-cors-headers==3.5.0
 django-filter==2.4.0
 django-graphql-auth==0.3.12
