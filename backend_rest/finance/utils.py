@@ -9,9 +9,9 @@ def camel_to_underscore(camel):
 
 
 def params_entry_filter(kwargs_in):
-    print(kwargs_in)
     params = {}
     kwargs = dict((camel_to_underscore(k), v) for k, v in kwargs_in.items())
+    print(kwargs)
     if 'entity' in kwargs:
         params['entity_id'] = kwargs['entity']
     if 'entry_type' in kwargs:
