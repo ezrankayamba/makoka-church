@@ -21,7 +21,8 @@ def params_entry_filter(kwargs_in):
     else:
         params['created_at__gt'] = datetime.date.today()
     if 'date_to' in kwargs:
-        params['created_at__lt'] = datetime.datetime.strptime(kwargs['date_to'], '%Y-%m-%d') + datetime.timedelta(days=1)
+        # params['created_at__lt'] = datetime.datetime.strptime(kwargs['date_to'], '%Y-%m-%d') + datetime.timedelta(days=1)
+        params['created_at__lte'] = kwargs['date_to']
     else:
         params['created_at__lt'] = datetime.date.today() + datetime.timedelta(days=1)
 
